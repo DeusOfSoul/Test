@@ -13,7 +13,8 @@ public class Main {
 
 
     public static void main(String[] args) {
-        Parser parser = new Parser();
+
+
         System.out.println();
 
     }
@@ -89,54 +90,50 @@ public class Main {
         }
     }
 
-    class Parser {
-        public Parser() {
 
-        }
 
-        public String read_csv(String file_address) throws IOException {
-            BufferedReader br = new BufferedReader(new FileReader(file_address));
-            try {
+    public String read_csv(String file_address) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(file_address));
+        try {
 
-                StringBuilder sb = new StringBuilder();
-                String line = br.readLine();
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
 
-                while (line != null) {
-                    sb.append(line);
-                    sb.append(System.lineSeparator());
-                    line = br.readLine();
-                }
-                String everyline = sb.toString();
-                return everyline;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } finally {
-                br.close();
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
             }
+            String everyline = sb.toString();
+            return everyline;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } finally {
+            br.close();
         }
+    }
 
-        public List<Address> stringToAddresses(String addressList) {
-            String noBracket = addressList.replace("[", "").replace("]", "");
-            String[] parts = noBracket.split("|");
-            int id = Integer.parseInt(parts[0]);
-            String state = parts[1];
-            String city = parts[2];
-            String street = parts[3];
-            int houseNumber = Integer.parseInt(parts[4]);
-            int zipCode = Integer.parseInt(parts[5]);
-            String refRegion = parts[6];
+    public List<Address> stringToAddresses(String addressList) {
+        String noBracket = addressList.replace("[", "").replace("]", "");
+        String[] parts = noBracket.split("|");
+        int id = Integer.parseInt(parts[0]);
+        String state = parts[1];
+        String city = parts[2];
+        String street = parts[3];
+        int houseNumber = Integer.parseInt(parts[4]);
+        int zipCode = Integer.parseInt(parts[5]);
+        String refRegion = parts[6];
 
-            return List.of(new Address[]{new Address(id, state, city, street, houseNumber, zipCode, refRegion)});
+        return List.of(new Address[]{new Address(id, state, city, street, houseNumber, zipCode, refRegion)});
+    }
+
+    public List<Person> csvToPersons(String csv) {
+        List<Person> ret = new ArrayList<>();
+        for(String description: csv.split("\n")) {
+            String[] parts = description.split(";");
+            Person cur = new Person(parts[0], parts[1], this.stringToAddresses(parts[2]), Integer.parseInt(parts[3]));
+            ret.add(cur);
         }
-
-        public List<Person> csvToPersons(String csv) {
-            List<Person> ret = new ArrayList<>();
-            for(String description: csv.split("\n")) {
-                String[] parts = description.split(";");
-                Person cur = new Person(parts[0], parts[1], this.stringToAddresses(parts[2]), Integer.parseInt(parts[3]));
-                ret.add(cur);
-            }
-            return ret;
-        }
+        return ret;
     }
 }
