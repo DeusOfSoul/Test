@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -22,20 +23,16 @@ public class Main {
     }
 
     class Person {
-        public int id;
+
         public String fistname;
         public String lastname;
-        public LocalDate birthday;
-        public List<Solution2.Address> addresses;
-        public Set<Integer> friends;
 
-        public Person(int id, String fistname, String lastname, LocalDate birthday, List<Solution2.Address> addresses, Set<Integer> friends) {
-            this.id = id;
+        public List<Address> addressList;
+
+        public Person(String fistname, String lastname, List<Address> addressList) {
             this.fistname = fistname;
             this.lastname = lastname;
-            this.birthday = birthday;
-            this.addresses = addresses;
-            this.friends = friends;
+            this.addressList = addressList;
         }
     }
 
@@ -66,5 +63,27 @@ public class Main {
         }
     }
 
-    class
+    class Treatment{
+        public String name;
+        public int number;
+        public double avgCharges;
+        public double avgTotalPayments;
+        public double avgMedicalPayments;
+
+
+    }
+
+    class Hospital{
+        public String name;
+        public int providerId;
+        public double address;
+        List<Treatment> treatments;
+
+        public Hospital(String name, int providerId, double address) {
+            this.name = name;
+            this.providerId = providerId;
+            this.address = address;
+            this.treatments = new ArrayList<>();
+        }
+    }
 }
