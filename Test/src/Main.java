@@ -12,14 +12,47 @@ import java.util.stream.Collectors;
 public class Main {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
+        // Read patient CSV
+        String csvInpatient = read_csv("C:\\Users\\mauri\\Desktop\\Test\\data\\inpatientCharges.csv");
+        String csvPerson = read_csv("C:\\Users\\mauri\\Desktop\\Test\\data\\persons.csv");
+
+        // convert patient
+        List<Person> personList = new ArrayList<>();
+        for(String description: csv.split("\n")) {
+            String[] parts = description.split(";");
+
+            // parse address
+            String noBracket = addressList.replace("[", "").replace("]", "");
+            String[] parts = noBracket.split("|");
+            int id = Integer.parseInt(parts[0]);
+            String state = parts[1];
+            String city = parts[2];
+            String street = parts[3];
+            int houseNumber = Integer.parseInt(parts[4]);
+            int zipCode = Integer.parseInt(parts[5]);
+            String refRegion = parts[6];
+
+            List address = List.of(new Address[]{new Address(id, state, city, street, houseNumber, zipCode, refRegion)});
+
+
+            Person cur = new Person(parts[0], parts[1], address, Integer.parseInt(parts[3]));
+            personList.add(cur);
+        }
+
+
+        // Sorting
+//        personList.stream().sorted((p1, p2) -> );
+//        .sorted((p1, p2) -> )
+//        .sorted((p1, p2) -> )
+//        .sorted((p1, p2) -> )
 
         System.out.println();
 
     }
 
-    class Person {
+    public class Person {
 
         public String firstname;
         public String lastname;
@@ -36,7 +69,7 @@ public class Main {
         }
     }
 
-    class Address {
+    public class Address {
         public int id;
         public String state;
         public String city;
@@ -63,25 +96,31 @@ public class Main {
         }
     }
 
-    class Treatment{
+    public class Treatment{
         public String name;
         public int number;
         public double avgCharges;
         public double avgTotalPayments;
         public double avgMedicalPayments;
 
-
+        public Treatment(String name, int number, double avgCharges, double avgTotalPayments, double avgMedicalPayments) {
+            this.name = name;
+            this.number = number;
+            this.avgCharges = avgCharges;
+            this.avgTotalPayments = avgTotalPayments;
+            this.avgMedicalPayments = avgMedicalPayments;
+        }
     }
 
-    class Hospital{
+    public class Hospital{
 
         public int id;
         public String name;
         public int providerId;
-        public double address;
+        public Address address;
         List<Treatment> treatments;
 
-        public Hospital(int id, String name, int providerId, double address) {
+        public Hospital(int id, String name, int providerId, Address address) {
             this.id = id;
             this.name = name;
             this.providerId = providerId;
@@ -92,7 +131,7 @@ public class Main {
 
 
 
-    String read_csv(String file_address) throws IOException {
+    static String read_csv(String file_address) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file_address));
         try {
 
@@ -113,7 +152,7 @@ public class Main {
         }
     }
 
-    List<Address> stringToAddresses(String addressList) {
+    static List<Address> stringToAddresses(String addressList) {
         String noBracket = addressList.replace("[", "").replace("]", "");
         String[] parts = noBracket.split("|");
         int id = Integer.parseInt(parts[0]);
@@ -126,14 +165,14 @@ public class Main {
 
         return List.of(new Address[]{new Address(id, state, city, street, houseNumber, zipCode, refRegion)});
     }
-
-    List<Person> csvToPersons(String csv) {
-        List<Person> ret = new ArrayList<>();
-        for(String description: csv.split("\n")) {
-            String[] parts = description.split(";");
-            Person cur = new Person(parts[0], parts[1], this.stringToAddresses(parts[2]), Integer.parseInt(parts[3]));
-            ret.add(cur);
-        }
-        return ret;
-    }
+//
+//    static List<Person> csvToPersons(String csv) {
+//        List<Person> ret = new ArrayList<>();
+//        for(String description: csv.split("\n")) {
+//            String[] parts = description.split(";");
+//            Person cur = new Person(parts[0], parts[1], Main::stringToAddresses(parts[2]), Integer.parseInt(parts[3]));
+//            ret.add(cur);
+//        }
+//        return ret;
+//    }
 }
