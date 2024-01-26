@@ -1,0 +1,13 @@
+FirstName;LastName;Addresses;Hospital-ID
+Tom;Smith;"[NY|Fulton|13063|102 Academy St,NY|Fulton|13069|309 Buffalo St]";50082
+Thomas;Anderson;[NY|Fulton|13063|10 Park St];10103
+Rachel;Davis;[NY|Fulton|13063|1 Park St];30093
+Lisa;Johnson;[NY|Fulton|13069|310 Buffalo St];50082
+Kelly;Wilson;[OK|Oklahoma City|73112|25 NW 30th St];30110
+Simon;Smith;[OK|Oklahoma City|73112|25 NW 28th St];60028
+Elliot;Jones;[OK|Tusla|74104|2429 E 15th St];60028
+Spencer;Miller;[OK|Tusla|74104|2429 E 15th St];70020
+Ingrid;Brown;[CA|Santa Maria|93454|1700 S Bradley Rd];30093
+Hamish;Johnson;[NY|Fulton|13069|311 Buffalo St];50082
+Bruce;Smith;[CA|Santa Maria|93454|1124 N Suey Rd];50082
+Tom;Willliams;[CA|Santa Maria|93454|1725 N Broadway];50082
