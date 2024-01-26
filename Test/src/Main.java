@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -8,10 +9,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-
-        List<Person> persons = new ArrayList<>();
-
-        persons.
 
 
 
@@ -22,12 +19,15 @@ public class Main {
         public String fistname;
         public String lastname;
 
+        public int hospitalId;
+
         public List<Address> addressList;
 
-        public Person(String fistname, String lastname, List<Address> addressList) {
+        public Person(String fistname, String lastname, List<Address> addressList, int hospitalId) {
             this.fistname = fistname;
             this.lastname = lastname;
             this.addressList = addressList;
+            this.hospitalId = hospitalId;
         }
     }
 
