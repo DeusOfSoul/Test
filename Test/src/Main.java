@@ -92,7 +92,7 @@ public class Main {
 
 
 
-    public String read_csv(String file_address) throws IOException {
+    String read_csv(String file_address) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file_address));
         try {
 
@@ -113,7 +113,7 @@ public class Main {
         }
     }
 
-    public List<Address> stringToAddresses(String addressList) {
+    List<Address> stringToAddresses(String addressList) {
         String noBracket = addressList.replace("[", "").replace("]", "");
         String[] parts = noBracket.split("|");
         int id = Integer.parseInt(parts[0]);
@@ -127,7 +127,7 @@ public class Main {
         return List.of(new Address[]{new Address(id, state, city, street, houseNumber, zipCode, refRegion)});
     }
 
-    public List<Person> csvToPersons(String csv) {
+    List<Person> csvToPersons(String csv) {
         List<Person> ret = new ArrayList<>();
         for(String description: csv.split("\n")) {
             String[] parts = description.split(";");
